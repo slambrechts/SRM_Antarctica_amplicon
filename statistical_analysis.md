@@ -24,7 +24,15 @@ insert code here
 ### Calculate correlations between and investigate distribution of environmental variables
 
 ```bash
-insert code here
+library(corrplot)
+
+setwd(dir = "C:/Amplicon new/16S_all_maxee2_uparse97/distribution and correlations metadata/")
+
+metadata <- read.csv("metadata_16S_numeric.csv", check.names = FALSE, sep = ";")
+
+Correlation <- cor(metadata, use="complete.obs") # using complete.obs
+
+corrplot(Correlation, method = "number") # Display the Pearson correlation coefficient (Pearson is the default method)
 ```
 
 ### Incorporate distance between sampling sites
