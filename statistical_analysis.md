@@ -23,6 +23,8 @@ insert code here
 
 ### Calculate correlations between and investigate distribution of environmental variables
 
+Correlations:
+
 ```bash
 library(corrplot)
 
@@ -33,6 +35,42 @@ metadata <- read.csv("metadata_16S_numeric.csv", check.names = FALSE, sep = ";")
 Correlation <- cor(metadata, use="complete.obs") # using complete.obs
 
 corrplot(Correlation, method = "number") # Display the Pearson correlation coefficient (Pearson is the default method)
+```
+
+Distribution:
+
+```bash
+library(ggpubr)
+library(moments)
+
+as.numeric(x = metadata$dem) ##does not work work
+as.numeric(x = metadata$aspect) ##does not work
+as.numeric(x = metadata$slope) ##does not work
+
+skewness(metadata$pH_dest, na.rm = TRUE)
+skewness(metadata$Soil_dry_weight, na.rm = TRUE)
+skewness(metadata$Soil_dry_way_II, na.rm = TRUE)
+skewness(metadata$TOC, na.rm = TRUE)
+skewness(metadata$NH4, na.rm = TRUE)
+skewness(metadata$conductivity, na.rm = TRUE)
+skewness(metadata$TN, na.rm = TRUE)
+skewness(metadata$TP, na.rm = TRUE)
+skewness(metadata$NO3, na.rm = TRUE)
+skewness(metadata$PO4, na.rm = TRUE)
+
+metadata$conductivity <- log10(metadata$conductivity)
+
+hist(metadata$pH_dest, col='steelblue')
+hist(metadata$pH_KCl, col='steelblue')
+hist(metadata$conductivity, col='steelblue')
+hist(metadata$TOC, col='steelblue')
+hist(metadata$dry_weight, col='steelblue')
+hist(metadata$dry_weight_2, col='steelblue')
+hist(metadata$`N-NH4`, col='steelblue')
+hist(metadata$N_NO3, col='steelblue')
+hist(metadata$TN, col='steelblue')
+hist(metadata$TP, col='steelblue')
+hist(metadata$dry_weight_2, col='steelblue')
 ```
 
 ### Incorporate distance between sampling sites
