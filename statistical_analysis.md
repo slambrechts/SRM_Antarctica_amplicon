@@ -58,6 +58,17 @@ skewness(metadata$TP, na.rm = TRUE)
 skewness(metadata$NO3, na.rm = TRUE)
 skewness(metadata$PO4, na.rm = TRUE)
 
+kurtosis(metadata$pH_dest, na.rm = TRUE)
+kurtosis(metadata$Soil_dry_weight, na.rm = TRUE)
+kurtosis(metadata$Soil_dry_way_II, na.rm = TRUE)
+kurtosis(metadata$TOC, na.rm = TRUE)
+kurtosis(metadata$NH4, na.rm = TRUE)
+kurtosis(metadata$conductivity, na.rm = TRUE)
+kurtosis(metadata$TN, na.rm = TRUE)
+kurtosis(metadata$TP, na.rm = TRUE)
+kurtosis(metadata$NO3, na.rm = TRUE)
+kurtosis(metadata$PO4, na.rm = TRUE)
+
 metadata$conductivity <- log10(metadata$conductivity)
 
 hist(metadata$pH_dest, col='steelblue')
