@@ -70,6 +70,10 @@ kurtosis(metadata$NO3, na.rm = TRUE)
 kurtosis(metadata$PO4, na.rm = TRUE)
 
 metadata$conductivity <- log10(metadata$conductivity)
+metadata$TOC <- log10(metadata$TOC)
+metadata$TP_g_kg <- log10(metadata$TP_g_kg)
+metadata$N_NO3 <- log10(metadata$N_NO3)
+metadata$N.NH4 <- log10(metadata$N.NH4)
 
 hist(metadata$pH_dest, col='steelblue')
 hist(metadata$pH_KCl, col='steelblue')
