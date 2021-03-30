@@ -69,11 +69,17 @@ kurtosis(metadata$TP, na.rm = TRUE)
 kurtosis(metadata$NO3, na.rm = TRUE)
 kurtosis(metadata$PO4, na.rm = TRUE)
 
+## Transformation
 metadata$conductivity <- log10(metadata$conductivity)
 metadata$TOC <- log10(metadata$TOC)
 metadata$TP_g_kg <- log10(metadata$TP_g_kg)
 metadata$N_NO3 <- log10(metadata$N_NO3)
 metadata$N.NH4 <- log10(metadata$N.NH4)
+metadata$TN_g_kg <- log10(metadata$TN_g_kg)
+metadata$P_PO4 <- log10(metadata$P_PO4)
+## not transformation for pH
+
+Check distribution again
 
 hist(metadata$pH_dest, col='steelblue')
 hist(metadata$pH_KCl, col='steelblue')
@@ -86,6 +92,10 @@ hist(metadata$N_NO3, col='steelblue')
 hist(metadata$TN, col='steelblue')
 hist(metadata$TP, col='steelblue')
 hist(metadata$dry_weight_2, col='steelblue')
+
+skewness(metadata$pH_dest, na.rm = TRUE)
+kurtosis(metadata$pH_dest, na.rm = TRUE)
+...
 ```
 
 ### Incorporate distance between sampling sites
