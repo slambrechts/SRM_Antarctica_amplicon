@@ -47,6 +47,18 @@ as.numeric(x = metadata$dem) ##does not work work
 as.numeric(x = metadata$aspect) ##does not work
 as.numeric(x = metadata$slope) ##does not work
 
+hist(metadata$pH_dest, col='steelblue')
+hist(metadata$pH_KCl, col='steelblue')
+hist(metadata$conductivity, col='steelblue')
+hist(metadata$TOC, col='steelblue')
+hist(metadata$dry_weight, col='steelblue')
+hist(metadata$dry_weight_2, col='steelblue')
+hist(metadata$N.NH4, col='steelblue')
+hist(metadata$N_NO3, col='steelblue')
+hist(metadata$TN_g_kg, col='steelblue')
+hist(metadata$TP_g_kg, col='steelblue')
+hist(metadata$dry_weight_2, col='steelblue')
+
 skewness(metadata$pH_dest, na.rm = TRUE)
 skewness(metadata$Soil_dry_weight, na.rm = TRUE)
 skewness(metadata$Soil_dry_way_II, na.rm = TRUE)
@@ -79,22 +91,10 @@ metadata$TN_g_kg <- log10(metadata$TN_g_kg)
 metadata$P_PO4 <- log10(metadata$P_PO4)
 ## not transformation for pH
 
-Check distribution again
-
-hist(metadata$pH_dest, col='steelblue')
-hist(metadata$pH_KCl, col='steelblue')
-hist(metadata$conductivity, col='steelblue')
-hist(metadata$TOC, col='steelblue')
-hist(metadata$dry_weight, col='steelblue')
-hist(metadata$dry_weight_2, col='steelblue')
-hist(metadata$N.NH4, col='steelblue')
-hist(metadata$N_NO3, col='steelblue')
-hist(metadata$TN_g_kg, col='steelblue')
-hist(metadata$TP_g_kg, col='steelblue')
-hist(metadata$dry_weight_2, col='steelblue')
-
-skewness(metadata$pH_dest, na.rm = TRUE)
-kurtosis(metadata$pH_dest, na.rm = TRUE)
+##Check distribution again
+hist...
+skewness...
+kurtosis...
 ...
 ```
 
