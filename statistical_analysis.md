@@ -18,7 +18,17 @@ normalize the non-rarefied OTU table using cumulative-sum scaling (CSS)
 Calculate Bray-Curtis dissimilarity distance of OTU table using phyloseq or vegan
 
 ```bash
-insert code here
+# Step 1: Install devtools
+install.packages("devtools")
+library(devtools)
+
+# Step 2: Install MicrobiomeAnalystR WITHOUT documentation
+devtools::install_github("xia-lab/MicrobiomeAnalystR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual", "--no-build-vignettes"))
+
+# Step 2: Install MicrobiomeAnalystR WITH documentation
+devtools::install_github("xia-lab/MicrobiomeAnalystR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
+
+otutable<-PerformNormalization(otutable, "rarewi", "CSS", "none")
 ```
 
 ### Calculate correlations between and investigate distribution of environmental variables
