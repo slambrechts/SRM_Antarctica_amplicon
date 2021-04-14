@@ -27,7 +27,7 @@ library(corrplot)
 data_almost <- read.csv("otutab_16S_all_maxee2_97.csv", header = T, sep = ",", stringsAsFactors = F)
 #26282 OTUs, 257 samples
 ```
-# change wrong names in data_aq
+# change wrong names in the otu table
 ```bash
 oldnames = c("DV_SF2_CON_1_A_R", "DV_SF2_CON_2_A", "DV_SF2_CON_2_A_18", "DV_SF2_CON_2_B", "DV_SF2_CON_2_B_18", "DV_SF2_CON_2_C", "DV_SF2_CON_2_C_18", "DV_SF2_CON_3_A", "DV_SF2_CON_3_A_18", "DV_SF2_CON_3_B", "DV_SF2_CON_3_B_18", "DV_SF2_CON_3_C", "DV_SF2_CON_3_C_18", "OTC15_CON_A_19", "UT_OTC_N_A_18", "UT_OTC_N_B_18", "UT_OTC_N_C_18")
 newnames = c("DV_SF2_CON_1_A_18_R", "DV_SF2_2_A", "DV_SF2_2_A_18", "DV_SF2_2_B", "DV_SF2_2_B_18", "DV_SF2_2_C", "DV_SF2_2_C_18", "DV_SF2_3_A", "DV_SF2_3_A_18", "DV_SF2_3_B", "DV_SF2_3_B_18", "DV_SF2_3_C", "DV_SF2_3_C_18", "OTC15_16_17_CON_A_19", "UT_OTC2_A_18", "UT_OTC2_B_18", "UT_OTC2_C_18")
