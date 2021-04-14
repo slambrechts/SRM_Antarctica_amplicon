@@ -251,6 +251,4 @@ data_rar_clr <- as.data.frame(microbiome::transform(data_rar[, !names(data_rar) 
 data_rar_clr$taxonomy <- data_rar$taxonomy
 
 write.csv(data_rar_clr, "otutab_CLR_rarefied5397.csv")
-
-data_rar_clr$taxonomy <- data_rar$taxonomy
 ```
