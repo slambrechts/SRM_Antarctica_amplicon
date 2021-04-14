@@ -247,11 +247,10 @@ colnames(data_rar) <- colnames(samples_above_5397reads)
 ```bash
 library(microbiome)
 
-data_rar <- as.data.frame(microbiome::transform(data_rar[, !names(data_rar) %in% "taxonomy"], "clr"))  
-data_rar_clr$taxonomy <- data_rar_clr$taxonomy
+data_rar_clr <- as.data.frame(microbiome::transform(data_rar[, !names(data_rar) %in% "taxonomy"], "clr"))  
+data_rar_clr$taxonomy <- data_rar$taxonomy
 
 write.csv(data_rar_clr, "otutab_CLR_rarefied5397.csv")
-  
+
 data_rar_clr$taxonomy <- data_rar$taxonomy
 ```
-
