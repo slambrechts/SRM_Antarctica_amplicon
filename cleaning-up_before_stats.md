@@ -99,23 +99,23 @@ dim(data)
 ```bash
 metadata_original <- read.csv("metadata_16S_all.csv", header = T, sep = ",", stringsAsFactors = T)
 ```
-### subset metadata table
+# subset metadata table
 The idea is now to subset the metadata table without the aquatic samples, store the colnames as a vector and use it to finally subset the otutable in order to have the exact same set of samples (in the same order)
 
-# remove aquatic samples
+### remove aquatic samples
 ```bash
 metadata_aq <- metadata_original %>% filter(habitat != "aquatic") #filter aquatic samples
 dim(metadata_aq) #check dimension
 ```
-# store the aquatic sample names 
+### store the aquatic sample names 
 ```bash
 aquatic_samples <- metadata_original %>% filter(habitat == "aquatic") 
 row.names(aquatic_samples) <- aquatic_samples[, 1]
 aquatic_samples2 <- row.names(aquatic_samples)
 ```
-### final substet of the otutable
+# final substet of the otutable
 
-# remove the aquatic samples
+### remove the aquatic samples
 ```bash 
 data_aq <- data %>% select(- all_of(aquatic_samples2))
 dim(data_aq)
@@ -123,7 +123,7 @@ dim(data_aq)
 head(data_aq)
 ```
 
-# remove otus with 0 or 1 reads in the whole dataset 
+### remove otus with 0 or 1 reads in the whole dataset 
 ```bash 
 data_aq <- data_aq[rowSums(data_aq[!names(data_aq) %in% "taxonomy"])>1,] #select all columns but the taxonomy one
 dim(data_aq)
@@ -132,7 +132,7 @@ dim(data_aq)
 rowSums(data_aq[!names(data_aq) %in% "taxonomy"]) == 1 #check if all singletones were removed
 ```
 
-### final subset of the metadata table: only retain the same samples as in the otutable
+# final subset of the metadata table: only retain the same samples as in the otutable
 ```bash
 samples_labels <- colnames(data_aq[, !names(data_aq) %in% "taxonomy"])
 samples_labels2 <- paste0(samples_labels, collapse = '$|')
@@ -158,7 +158,7 @@ data_aq2 <- data_aq[ , order(names(data_aq[, !names(data_aq2) %in% "taxonomy"]))
 data_aq2$taxonomy <- data_aq$taxonomy #add the taxonomy column
 ```
 
-### remove replicates in both tables
+# remove replicates in both tables
 ```bash
 metadata$SampleID <- rownames(metadata) 
 metadata$sum_reads <- colSums(data_aq2[, !names(data_aq2) %in% "taxonomy"])
@@ -173,7 +173,7 @@ metadata_no_repl <- metadata %>%
 metadata_no_repl <- as.data.frame(metadata_no_repl) 
 rownames(metadata_no_repl) <- metadata_no_repl$SampleID #with the rows called with the samplename
 ```
-# create variable with the same sample names as in the metatable + "taxonomy", so that only the right columns will be kept in the otutable
+### create variable with the same sample names as in the metatable + "taxonomy", so that only the right columns will be kept in the otutable
 ```bash
 samples_no_repl <- c(rownames(metadata_no_repl), "taxonomy") 
 ```
@@ -184,7 +184,7 @@ dim(data_no_repl)
 #24193 otus, 104 samples
 ```
 
-# remove otus with 0 or 1 reads in the whole dataset 
+### remove otus with 0 or 1 reads in the whole dataset 
 ```bash 
 data_no_repl <- data_no_repl[rowSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"])>1,]
 dim(data_no_repl)
@@ -199,9 +199,9 @@ write.csv(metadata_no_repl, file = "meta_no_replicates.csv")
 
 ```
 
-### Rarefaction
+# Rarefaction
 
-# keep samples which minimum reads number is 1000, before rarefaction
+### keep samples which minimum reads number is 1000, before rarefaction
 ```bash 
 samples_above_1000reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) > 1000]
 samples_below_1000reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) < 1000]
@@ -212,7 +212,7 @@ colSums(samples_above_1000reads[!names(samples_above_1000reads) %in% "taxonomy"]
 dim(samples_above_1000reads)
 #24193 otus, 192 samples
 ```
-# keep samples which minimum reads number is 2683, before rarefaction
+### keep samples which minimum reads number is 2683, before rarefaction
 ```bash
 samples_above_2683reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) > 2683]
 samples_below_2683reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) < 2683]
@@ -224,7 +224,7 @@ colSums(samples_above_2683reads[!names(samples_above_2683reads) %in% "taxonomy"]
 colSums(samples_above_2683reads[!names(samples_above_2683reads) %in% "taxonomy"])
 ```
 
-# keep samples which minimum reads number is 5000, before rarefaction
+### keep samples which minimum reads number is 5000, before rarefaction
 ```bash
 samples_above_5397reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) > 5397]
 samples_below_5397reads <- data_no_repl[, colSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"]) < 5397]
@@ -235,7 +235,7 @@ dim(samples_above_5397reads)
 colSums(samples_above_5397reads[, !names(samples_above_5397reads) %in% "taxonomy"]) < 5397
 colSums(samples_above_5397reads[, !names(samples_above_5397reads) %in% "taxonomy"])
 ```
-# rarefaction 
+### rarefaction 
 ```bash
 data.l <- list(data = samples_above_5397reads)
 
