@@ -186,11 +186,11 @@ dim(data_no_repl)
 
 # remove otus with 0 or 1 reads in the whole dataset 
 ```bash 
-data_no_repl <- data_no_repl[rowSums(data_no_repl[,1:104])>1,]
+data_no_repl <- data_no_repl[rowSums(data_no_repl[!names(data_no_repl) %in% "taxonomy"])>1,]
 dim(data_no_repl)
 #21543 otus, 104 samples
 
-rowSums(data_no_repl[,1:104]) == 1 #just to check
+rowSums(data_no_repl[!names(data_no_repl) %in% "taxonomy",]) == 1 #just to check
 ```
 # create .csv files for both tables 
 ```bash
