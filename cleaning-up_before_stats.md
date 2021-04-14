@@ -154,14 +154,14 @@ meta_SampleID[!(meta_SampleID %in% samples_labels)]
 # both tables with the same sample names order (alphabetically)
 ```bash
 metadata <- metadata[order(rownames(metadata)),]
-data_aq2 <- data_aq[ , order(names(data_aq[, 1:197]))]
+data_aq2 <- data_aq[ , order(names(data_aq[, !names(data_aq2) %in% "taxonomy"]))]
 data_aq2$taxonomy <- data_aq$taxonomy #add the taxonomy column
 ```
 
 ### remove replicates in both tables
 ```bash
 metadata$SampleID <- rownames(metadata) 
-metadata$sum_reads <- colSums(data_aq2[,1:197])
+metadata$sum_reads <- colSums(data_aq2[, !names(data_aq2) %in% "taxonomy"])
 
 metadata_no_repl <- metadata %>% 
   group_by(sample_ID) %>%         #sample_ID is a column with the same sample name for every replicates of one same sample
