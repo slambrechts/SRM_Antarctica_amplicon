@@ -107,7 +107,7 @@ The idea is now to subset the metadata table without the aquatic samples, store 
 metadata_aq <- metadata_original %>% filter(habitat != "aquatic") #filter aquatic samples
 dim(metadata_aq) #check dimension
 ```
-# store the aquatic samples' names 
+# store the aquatic sample names 
 ```bash
 aquatic_samples <- metadata_original %>% filter(habitat == "aquatic") 
 row.names(aquatic_samples) <- aquatic_samples[, 1]
@@ -151,7 +151,7 @@ We use the SampleID column and the just created variable "samples_labels"
 samples_labels[!(samples_labels %in% meta_SampleID)]
 meta_SampleID[!(meta_SampleID %in% samples_labels)]
 ```
-# both tables with the same samples' names order (alphabetically)
+# both tables with the same sample names order (alphabetically)
 ```bash
 metadata <- metadata[order(rownames(metadata)),]
 data_aq2 <- data_aq[ , order(names(data_aq[, 1:197]))]
