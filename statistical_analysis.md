@@ -62,6 +62,9 @@ hist(metadata$N.NH4, col='steelblue')
 hist(metadata$N_NO3, col='steelblue')
 hist(metadata$TN_g_kg, col='steelblue')
 hist(metadata$TP_g_kg, col='steelblue')
+hist(metadata$dem, col='steelblue')
+hist(metadata$aspect, col='steelblue')
+hist(metadata$slope, col='steelblue')
 
 skewness(metadata$pH_dest, na.rm = TRUE)
 skewness(metadata$Soil_dry_weight, na.rm = TRUE)
@@ -73,6 +76,9 @@ skewness(metadata$TN_g_kg, na.rm = TRUE)
 skewness(metadata$TP_g_kg, na.rm = TRUE)
 skewness(metadata$N_NO3, na.rm = TRUE)
 skewness(metadata$P_PO4, na.rm = TRUE)
+skewness(metadata$dem, na.rm = TRUE)
+skewness(metadata$aspect, na.rm = TRUE)
+skewness(metadata$slope, na.rm = TRUE)
 
 kurtosis(metadata$pH_dest, na.rm = TRUE)
 kurtosis(metadata$Soil_dry_weight, na.rm = TRUE)
@@ -84,8 +90,12 @@ kurtosis(metadata$TN_g_kg, na.rm = TRUE)
 kurtosis(metadata$TP_g_kg, na.rm = TRUE)
 kurtosis(metadata$N_NO3, na.rm = TRUE)
 kurtosis(metadata$P_PO4, na.rm = TRUE)
+kurtosis(metadata$dem, na.rm = TRUE)
+kurtosis(metadata$aspect, na.rm = TRUE)
+kurtosis(metadata$slope, na.rm = TRUE)
 
-## Transformations performed
+
+#################### Transformations performed ###########################
 metadata$conductivity <- log10(metadata_MA$conductivity)
 metadata$TOC <- log10(metadata_MA$TOC)
 metadata$TP_g_kg <- log10(metadata_MA$TP_g_kg)
@@ -97,6 +107,7 @@ metadata$Soil_dry_weight <- log10(max(metadata_MA$Soil_dry_weight+1) - metadata_
 metadata$Soil_dry_way_II <- log10(max(metadata_MA$Soil_dry_way_II+1) - metadata_MA$Soil_dry_way_II)
 metadata$slope <- log10(metadata_MA$slope)
 metadata$aspect <- sqrt(metadata_MA$aspect)
+## no transformation carried out for pH and dem
 
 ##Check distribution again
 hist...
