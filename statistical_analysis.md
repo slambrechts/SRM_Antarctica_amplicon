@@ -53,21 +53,15 @@ Distribution:
 library(ggpubr)
 library(moments)
 
-as.numeric(x = metadata$dem) ##does not work work
-as.numeric(x = metadata$aspect) ##does not work
-as.numeric(x = metadata$slope) ##does not work
-
 hist(metadata$pH_dest, col='steelblue')
-hist(metadata$pH_KCl, col='steelblue')
 hist(metadata$conductivity, col='steelblue')
 hist(metadata$TOC, col='steelblue')
-hist(metadata$dry_weight, col='steelblue')
-hist(metadata$dry_weight_2, col='steelblue')
+hist(metadata$Soil_dry_weight, col='steelblue')
+hist(metadata$Soil_dry_way_II, col='steelblue')
 hist(metadata$N.NH4, col='steelblue')
 hist(metadata$N_NO3, col='steelblue')
 hist(metadata$TN_g_kg, col='steelblue')
 hist(metadata$TP_g_kg, col='steelblue')
-hist(metadata$dry_weight_2, col='steelblue')
 
 skewness(metadata$pH_dest, na.rm = TRUE)
 skewness(metadata$Soil_dry_weight, na.rm = TRUE)
@@ -91,15 +85,18 @@ kurtosis(metadata$TP_g_kg, na.rm = TRUE)
 kurtosis(metadata$N_NO3, na.rm = TRUE)
 kurtosis(metadata$P_PO4, na.rm = TRUE)
 
-## Transform
-metadata$conductivity <- log10(metadata$conductivity)
-metadata$TOC <- log10(metadata$TOC)
-metadata$TP_g_kg <- log10(metadata$TP_g_kg)
-metadata$N_NO3 <- log10(metadata$N_NO3)
-metadata$N.NH4 <- log10(metadata$N.NH4)
-metadata$TN_g_kg <- log10(metadata$TN_g_kg)
-metadata$P_PO4 <- log10(metadata$P_PO4)
-## not transformation for pH
+## Transformations performed
+metadata$conductivity <- log10(metadata_MA$conductivity)
+metadata$TOC <- log10(metadata_MA$TOC)
+metadata$TP_g_kg <- log10(metadata_MA$TP_g_kg)
+metadata$N_NO3 <- log10(metadata_MA$N_NO3)
+metadata$N.NH4 <- log10(metadata_MA$N.NH4)
+metadata$TN_g_kg <- log10(metadata_MA$TN_g_kg)
+metadata$P_PO4 <- log10(metadata_MA$P_PO4)
+metadata$Soil_dry_weight <- log10(max(metadata_MA$Soil_dry_weight+1) - metadata_MA$Soil_dry_weight)
+metadata$Soil_dry_way_II <- log10(max(metadata_MA$Soil_dry_way_II+1) - metadata_MA$Soil_dry_way_II)
+metadata$slope <- log10(metadata_MA$slope)
+metadata$aspect <- sqrt(metadata_MA$aspect)
 
 ##Check distribution again
 hist...
