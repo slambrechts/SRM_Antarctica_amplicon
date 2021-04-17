@@ -36,6 +36,8 @@ Correlation <- cor(metadata, use="complete.obs") # using complete.obs
 
 corrplot(Correlation, method = "number") # Display the Pearson correlation coefficient (Pearson is the default method)
 
+
+
 # Multicorrelation
 
 vifstep(metadata[, c(22, 23, 32:44)],th=10)
@@ -128,8 +130,6 @@ insert code here
 ### Indicator taxa analysis
 
 ```bash
-NbClust(data = metadata$TOC, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 5, method = "kmeans")
-
 metadata_scaled <- cbind(metadata)
 
 metadata_scaled$TOC_scaled <- scale(metadata$TOC)
