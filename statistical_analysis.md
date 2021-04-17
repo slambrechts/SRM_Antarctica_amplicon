@@ -18,17 +18,7 @@ normalize the non-rarefied OTU table using cumulative-sum scaling (CSS)
 Calculate Bray-Curtis dissimilarity distance of OTU table using phyloseq or vegan
 
 ```bash
-# Step 1: Install devtools
-install.packages("devtools")
-library(devtools)
 
-# Step 2: Install MicrobiomeAnalystR WITHOUT documentation
-devtools::install_github("xia-lab/MicrobiomeAnalystR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual", "--no-build-vignettes"))
-
-# Step 2: Install MicrobiomeAnalystR WITH documentation
-devtools::install_github("xia-lab/MicrobiomeAnalystR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
-
-otutable<-PerformNormalization(otutable, "rarewi", "CSS", "none")
 ```
 
 ### Calculate correlations between and investigate distribution of environmental variables
@@ -45,6 +35,14 @@ metadata <- read.csv("metadata_16S_numeric.csv", check.names = FALSE, sep = ";")
 Correlation <- cor(metadata, use="complete.obs") # using complete.obs
 
 corrplot(Correlation, method = "number") # Display the Pearson correlation coefficient (Pearson is the default method)
+
+# Multicorrelation
+
+vifstep(metadata[, c(22, 23, 32:44)],th=10)
+
+vifstep(metadata_no_repl[, c(22, 23, 32, 34, 35, 37:44)],th=10) #removing pH_K_Cl (because less accurate - see Josef's email), and Soil_dry_weight_I
+
+vifstep(metadata_no_repl[, c(22, 23, 32, 34, 35, 38:44)],th=10) #without N_NH4
 ```
 
 Distribution:
@@ -130,5 +128,44 @@ insert code here
 ### Indicator taxa analysis
 
 ```bash
-insert code here
+NbClust(data = metadata$TOC, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 5, method = "kmeans")
+
+metadata_scaled <- cbind(metadata)
+
+metadata_scaled$TOC_scaled <- scale(metadata$TOC)
+
+metadata_scaled$conductivity <- scale(metadata$conductivity)
+metadata_scaled$TP_g_kg <- scale(metadata$TP_g_kg)
+metadata_scaled$N_NO3 <- scale(metadata$N_NO3)
+metadata_scaled$N.NH4 <- scale(metadata$N.NH4)
+metadata_scaled$TN_g_kg <- scale(metadata$TN_g_kg)
+metadata_scaled$P_PO4 <- scale(metadata$P_PO4)
+metadata_scaled$Soil_dry_weight <- scale(metadata$Soil_dry_weight)
+metadata_scaled$Soil_dry_way_II <- scale(metadata$Soil_dry_way_II)
+metadata_scaled$slope <- scale(metadata$slope)
+metadata_scaled$pH_dest <- scale(metadata$pH_dest)
+metadata_scaled$pH_K_Cl <- scale(metadata$pH_K_Cl)
+metadata_scaled$dem <- scale(metadata$dem)
+
+NbClust(data = metadata_scaled$TOC, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 12, method = "kmeans")
+NbClust(data = metadata_scaled$TOC_scaled, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 12, method = "kmeans")
+
+NbClust(data = metadata_scaled$TOC_scaled, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 10, method = "kmeans")
+
+set.seed(123)
+km.res <- kmeans(metadata_scaled$TOC_scaled, 5, nstart = 25)
+print(km.res)
+
+metadata_scaled_new <- cbind(metadata_scaled, TOC_cat = km.res$cluster)
+
+TOC <- subset(metadata_scaled_new, select=c(TOC,TOC_scaled,TOC_cat))
+
+
+#rename the clusters in TOC_cat
+
+metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 2] = "9-11"
+metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 4] = "4-6"
+metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 1] = "2.1-3.5"
+metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 3] = "1-2"
+metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 5] = "< 1"
 ```
