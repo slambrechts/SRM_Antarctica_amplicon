@@ -153,19 +153,16 @@ NbClust(data = metadata_scaled$TOC_scaled, diss = NULL, distance = "euclidean", 
 NbClust(data = metadata_scaled$TOC_scaled, diss = NULL, distance = "euclidean", min.nc = 2, max.nc = 10, method = "kmeans")
 
 set.seed(123)
-km.res <- kmeans(metadata_scaled$TOC_scaled, 5, nstart = 25)
+km.res <- kmeans(metadata_scaled$TOC_scaled, 3, nstart = 25)
 print(km.res)
 
-metadata_scaled_new <- cbind(metadata_scaled, TOC_cat = km.res$cluster)
+metadata98_scaled <- cbind(metadata98_scaled, TOC_groups = km.res$cluster)
 
-TOC <- subset(metadata_scaled_new, select=c(TOC,TOC_scaled,TOC_cat))
-
+TOC <- subset(metadata98_scaled, select=c(TOC,TOC_scaled,TOC_groups))
 
 #rename the clusters in TOC_cat
 
-metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 2] = "9-11"
-metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 4] = "4-6"
-metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 1] = "2.1-3.5"
-metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 3] = "1-2"
-metadata_scaled_new$TOC_cat[metadata_scaled_new$TOC_cat == 5] = "< 1"
+metadata98_scaled$TOC_groups[metadata98_scaled$TOC_groups == 2] = "9-11"
+metadata98_scaled$TOC_groups[metadata98_scaled$TOC_groups == 1] = "2-6"
+metadata98_scaled$TOC_groups[metadata98_scaled$TOC_groups == 3] = "0-2"
 ```
