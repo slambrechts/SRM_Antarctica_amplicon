@@ -160,7 +160,7 @@ metadata98_scaled <- cbind(metadata98_scaled, TOC_groups = km.res$cluster)
 
 TOC <- subset(metadata98_scaled, select=c(TOC,TOC_scaled,TOC_groups))
 
-#rename the clusters in TOC_cat
+#rename the clusters in TOC_groups
 
 metadata98_scaled$TOC_groups[metadata98_scaled$TOC_groups == 2] = "9-11"
 metadata98_scaled$TOC_groups[metadata98_scaled$TOC_groups == 1] = "2-6"
