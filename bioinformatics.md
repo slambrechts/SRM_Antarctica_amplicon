@@ -1,7 +1,7 @@
 # Pre-processing of raw amplicon data
 
 We started with 244 paired end fastq files, including 96 that are technical replicates (same DNA extract, separately PCR'ed and sequenced).  
-Sequencing was done on an Illumina Miseq. We sequenced the V1-V3 region (using the "pA" and "BKL1" primers) of the 16S gene using 2 x 250 bp reads
+Sequencing was done on an Illumina Miseq. We sequenced the V1-V3 region (using the "pA" and "BKL1" primers) of the 16S gene using 2 x 300 bp reads
 
 ## merging forward and reverse reads 
 
