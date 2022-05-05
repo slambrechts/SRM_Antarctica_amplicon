@@ -1,4 +1,4 @@
-# OTU/ZOTU pipeline (PEAR + UPARSE/UCHIME)
+# OTU pipeline (PEAR + UPARSE/UCHIME)
 
 We compared our original OTU based approach with two ASV based approaches (UNOISE3 and dada2). For dada2 see below
 
