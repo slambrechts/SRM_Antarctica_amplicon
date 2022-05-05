@@ -1,4 +1,4 @@
-## OTU pipeline (PEAR + UPARSE/UCHIME)
+# OTU pipeline (PEAR + UPARSE/UCHIME)
 
 We compared our original OTU based approach with two ASV based approaches (UNOISE3 and dada2). For dada2 see below
 
@@ -63,7 +63,7 @@ usearch -otutab merged.fasta -zotus 16S_all_maxee2_asv.fasta -otutabout otutab_1
 
 ```
 
-## dada2
+# dada2
 
 ```bash
 # DADA2 sequence processing
